@@ -1,16 +1,15 @@
 package main
 
 import (
+	"path/filepath"
 	"http"
-	"io"
 	"io/ioutil"
 	"log"
-	"strings"
 	"template"
-	"url"
 )
 
 const DRAFTS_DIR = "drafts"
+const TEMPLATES_DIR = "templates"
 
 func DraftsServer(w http.ResponseWriter, req *http.Request) {
 	draftsInfo, err := ioutil.ReadDir(DRAFTS_DIR)
@@ -29,18 +28,40 @@ func DraftsServer(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func PDFServer(w http.ResponseWriter, req *http.Request) {
-	path := strings.SplitN(req.URL.String(), "/", 3)
-	filename, err := url.QueryUnescape(path[2])
+func IndexServer(w http.ResponseWriter, req *http.Request) {
+	templates := templateWithLayout("index.html")
+	
+	err := templates.Execute(w, "layout.html", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	io.WriteString(w, filename)
+}
+
+// Loads the specified template from the TEMPLATES_DIR
+// along with the layouts.
+// Use the template by set.Execute(io.Writer, "layout.html", data)
+func templateWithLayout(filename string) (*template.Set) {
+	layout := filepath.Join(TEMPLATES_DIR, "layout.html")
+	templates, err := template.ParseTemplateFiles(layout)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	contentFilename := filepath.Join(TEMPLATES_DIR, filename)
+	content := template.New("Content")
+	_, err = content.ParseFile(contentFilename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	templates.Add(content)
+
+	return templates
 }
 
 func main() {
 	http.HandleFunc("/drafts", DraftsServer)
 	http.HandleFunc("/pdf/", PDFServer)
+	http.HandleFunc("/", IndexServer)
 
 	log.Println("Starting Server")
 	err := http.ListenAndServe(":3000", nil)
