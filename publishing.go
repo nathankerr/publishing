@@ -2,10 +2,12 @@ package main
 
 import (
 	"http"
-	//"io"
+	"io"
 	"io/ioutil"
 	"log"
+	"strings"
 	"template"
+	"url"
 )
 
 const DRAFTS_DIR = "drafts"
@@ -27,8 +29,18 @@ func DraftsServer(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func PDFServer(w http.ResponseWriter, req *http.Request) {
+	path := strings.SplitN(req.URL.String(), "/", 3)
+	filename, err := url.QueryUnescape(path[2])
+	if err != nil {
+		log.Fatal(err)
+	}
+	io.WriteString(w, filename)
+}
+
 func main() {
 	http.HandleFunc("/drafts", DraftsServer)
+	http.HandleFunc("/pdf/", PDFServer)
 
 	log.Println("Starting Server")
 	err := http.ListenAndServe(":3000", nil)
