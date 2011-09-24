@@ -2,23 +2,28 @@ package main
 
 import (
 	"http"
-	"io"
+	//"io"
 	"io/ioutil"
 	"log"
+	"template"
 )
 
 const DRAFTS_DIR = "drafts"
 
 func DraftsServer(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "Drafts\n")
-
 	draftsInfo, err := ioutil.ReadDir(DRAFTS_DIR)
 	if err != nil {
-		io.WriteString(w, err.String())
+		log.Fatal(err)
 	}
 
-	for _, v := range draftsInfo {
-		io.WriteString(w, v.Name)
+	template, err := template.ParseFile("templates/drafts.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = template.Execute(w, draftsInfo)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
