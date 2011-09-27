@@ -1,0 +1,38 @@
+\documentclass[a5paper]{article}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Georgia}
+\setlength\parindent{0pt}
+
+%\renewcommand\sizeminiscule{3.16pt}
+%\renewcommand\sizetiny{3.98pt}
+%\renewcommand\sizescriptsize{5.01pt}
+%\renewcommand\sizefootnotesize{6.31pt}
+%\renewcommand\sizesmall{7.94pt}
+\newcommand\sizenormal{9.844pt}
+\newcommand\sizelarge{15.859pt} % normal * 1.611
+%\renewcommand\sizeLarge{15.85pt}
+%\renewcommand\sizeLARGE{19.95pt}
+%\renewcommand\sizehuge{25.12pt}
+%\renewcommand\sizeHuge{31.62pt}
+%\renewcommand\sizeHUGE{39.81pt}
+%\renewcommand\sizeHUGER{50.12pt}
+
+%TODO: footer needs to be in rhythm
+\usepackage[a5paper, twoside, includeheadfoot, width=114.6mm, height=184.6mm, inner=12.7mm, top=12.7mm, nohead]{geometry}
+
+\renewcommand\normalsize{
+        \fontsize{\sizenormal}{\sizelarge}
+        \selectfont
+}
+
+\title{$title$}
+\author{$for(author)$$author$$sep$\\$endfor$}
+\date{$date$}
+
+\begin{document}
+%\maketitle
+
+$body$
+
+\end{document}
