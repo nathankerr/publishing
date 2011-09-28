@@ -1,37 +1,75 @@
 \documentclass[a5paper]{article}
 
-\usepackage{fontspec}
-\setmainfont[Ligatures=TeX]{Georgia}
-\setlength\parindent{0pt}
 
-%\renewcommand\sizeminiscule{3.16pt}
-%\renewcommand\sizetiny{3.98pt}
-%\renewcommand\sizescriptsize{5.01pt}
-%\renewcommand\sizefootnotesize{6.31pt}
-%\renewcommand\sizesmall{7.94pt}
+% Sizes
+\newcommand\sizeminiscule{0.907pt}
+\newcommand\sizetiny{1.461pt}
+\newcommand\sizescriptsize{2.354pt}
+\newcommand\sizefootnotesize{3.793pt}
+\newcommand\sizesmall{6.110pt}
 \newcommand\sizenormal{9.844pt}
 \newcommand\sizelarge{15.859pt} % normal * 1.611
-%\renewcommand\sizeLarge{15.85pt}
-%\renewcommand\sizeLARGE{19.95pt}
-%\renewcommand\sizehuge{25.12pt}
-%\renewcommand\sizeHuge{31.62pt}
-%\renewcommand\sizeHUGE{39.81pt}
-%\renewcommand\sizeHUGER{50.12pt}
+\newcommand\sizeLarge{25.548pt}
+\newcommand\sizeLARGE{41.158pt}
+\newcommand\sizehuge{66.306pt}
+\newcommand\sizeHuge{106.819pt}
+\newcommand\sizeHUGE{172.086pt}
+\newcommand\sizeHUGER{277.230pt}
 
-%TODO: footer needs to be in rhythm
-\usepackage[a5paper, twoside, includeheadfoot, width=114.6mm, height=184.6mm, inner=12.7mm, top=12.7mm, nohead]{geometry}
+% Setup Font and Font sizes
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Georgia}
 
+\renewcommand\tiny{
+	\fontsize{\sizetiny}{\sizescriptsize}
+	\selectfont
+}
+\renewcommand\scriptsize{
+	\fontsize{\sizescriptsize}{\sizefootnotesize}
+	\selectfont
+}
+\renewcommand\footnotesize{
+	\fontsize{\sizefootnotesize}{\sizesmall}
+	\selectfont
+}
+\renewcommand\small{
+	\fontsize{\sizesmall}{\sizenormal}
+	\selectfont
+}
 \renewcommand\normalsize{
-        \fontsize{\sizenormal}{\sizelarge}
-        \selectfont
+	\fontsize{\sizenormal}{\sizelarge}
+	\selectfont
+}
+\renewcommand\large{
+	\fontsize{\sizelarge}{\sizeLarge}
+	\selectfont
+}
+\renewcommand\Large{
+	\fontsize{\sizeLarge}{\sizeLARGE}
+	\selectfont
+}
+\renewcommand\LARGE{
+	\fontsize{\sizeLARGE}{\sizehuge}
+	\selectfont
+}
+\renewcommand\huge{
+	\fontsize{\sizehuge}{\sizeHuge}
+	\selectfont
+}
+\renewcommand\Huge{
+	\fontsize{\sizeHuge}{\sizeHUGE}
+	\selectfont
 }
 
-\title{$title$}
-\author{$for(author)$$author$$sep$\\$endfor$}
-\date{$date$}
+%TODO: footer needs to be in rhythm
+\usepackage[a5paper, twoside, includeheadfoot, width=114.6mm, height=184.6mm, inner=12.7mm, top=12.7mm, nohead, foot=\sizenormal]{geometry}
+
+% Paragraph settings
+%TODO: paragraphs need to maintain rhythm
+\setlength\parindent{0pt}
+\setlength\parskip{\sizelarge}
 
 \begin{document}
-%\maketitle
 
 $body$
 
