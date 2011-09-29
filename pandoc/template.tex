@@ -1,20 +1,19 @@
-\documentclass[a5paper]{article}
-
+\documentclass[a5paper,article]{memoir}
 
 % Sizes
-\newcommand\sizeminiscule{0.907pt}
-\newcommand\sizetiny{1.461pt}
-\newcommand\sizescriptsize{2.354pt}
-\newcommand\sizefootnotesize{3.793pt}
-\newcommand\sizesmall{6.110pt}
-\newcommand\sizenormal{9.844pt}
-\newcommand\sizelarge{15.859pt} % normal * 1.611
-\newcommand\sizeLarge{25.548pt}
-\newcommand\sizeLARGE{41.158pt}
-\newcommand\sizehuge{66.306pt}
-\newcommand\sizeHuge{106.819pt}
-\newcommand\sizeHUGE{172.086pt}
-\newcommand\sizeHUGER{277.230pt}
+\newcommand\sizeminiscule{1.014pt}
+\newcommand\sizetiny{1.633pt}
+\newcommand\sizescriptsize{2.631pt}
+\newcommand\sizefootnotesize{4.238pt}
+\newcommand\sizesmall{6.828pt}
+\newcommand\sizenormal{11pt}
+\newcommand\sizelarge{17.721pt} % normal * 1.611
+\newcommand\sizeLarge{28.548pt}
+\newcommand\sizeLARGE{45.992pt}
+\newcommand\sizehuge{74.093pt}
+\newcommand\sizeHuge{119.363pt}
+\newcommand\sizeHUGE{192.294pt}
+\newcommand\sizeHUGER{309.786pt}
 
 % Setup Font and Font sizes
 \usepackage{fontspec}
@@ -62,12 +61,42 @@
 }
 
 %TODO: footer needs to be in rhythm
-\usepackage[a5paper, twoside, includeheadfoot, width=114.6mm, height=184.6mm, inner=12.7mm, top=12.7mm, nohead, foot=\sizenormal]{geometry}
+\usepackage[a5paper, twoside, includeheadfoot, width=114.6mm, height=184.6mm, inner=12.7mm, top=12.7mm, headheight=\sizenormal,headsep=\sizenormal, foot=\sizelarge]{geometry}
 
 % Paragraph settings
 %TODO: paragraphs need to maintain rhythm
 \setlength\parindent{0pt}
 \setlength\parskip{\sizelarge}
+
+% Section style
+\setbeforesecskip{\sizelarge}
+\setsecindent{0pt}
+\setsecheadstyle{\Large}
+\setaftersecskip{1pt}
+
+% Subsection style
+\setbeforesubsecskip{\sizenormal}
+\setsubsecindent{0pt}
+\setsubsecheadstyle{\large}
+\setaftersubsecskip{1pt}
+
+% Subsubsection style
+\setbeforesubsubsecskip{1pt}
+\setsubsecindent{0pt}
+\setsubsubsecheadstyle{\normalsize}
+\setaftersubsubsecskip{1pt}
+
+% Paragraph style
+\setbeforeparaskip{1pt}
+\setparaindent{0pt}
+\setparaheadstyle{\bfseries}
+\setafterparaskip{-1em}
+
+% Subparagraph style
+\setbeforesubparaskip{1pt}
+\setsubparaindent{\parindent}
+\setsubparaheadstyle{\bfseries}
+\setaftersubparaskip{-1em}
 
 \begin{document}
 

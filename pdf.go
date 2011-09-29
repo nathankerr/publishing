@@ -16,11 +16,11 @@ const PANDOC_DIR = "pandoc"
 
 func PDFServer(w http.ResponseWriter, req *http.Request) {
 	filename := draftFilename(req)
-	iconv := exec.Command("iconv", "-f", "utf-16", "-t", "utf-8", filename)
+	//iconv := exec.Command("iconv", "-f", "utf-16", "-t", "utf-8", filename)
 	// try automatic reencoding
 	// Writer for mac defaults to UTF-8 encoding, while
 	// Writer for iPad only uses UTF-16
-	//iconv := exec.Command("iconv", "-t", "utf-8", filename)
+	iconv := exec.Command("iconv", "-t", "utf-8", filename)
 	// I will make sure and force mac to UTF-16
 
 	iconv_out, err := iconv.Output()
@@ -40,10 +40,18 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 	}
 	template = filepath.Join(template, "template.tex")
 
-	pdf_out := filepath.Join(tmpdir, "output.pdf")
-	pandoc := exec.Command("markdown2pdf",
-		"-o", pdf_out,
+	//pdf_out := filepath.Join(tmpdir, "output.pdf")
+	//pandoc := exec.Command("markdown2pdf",
+	//	"-o", pdf_out,
+	//	"--xetex",
+	//	"--template", template,
+	//)
+
+	tex_out := filepath.Join(tmpdir, "output.tex")
+	pandoc := exec.Command("pandoc",
+		"-o", tex_out,
 		"--xetex",
+		"--smart",
 		"--template", template,
 	)
 
@@ -53,6 +61,18 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 
 	if pandoc.Run() != nil {
 		log.Fatal("pdfserver pandoc.Run:", err)
+	}
+
+	pdf_out := filepath.Join(tmpdir, "output.pdf")
+	xelatex := exec.Command("xelatex",
+		//"-o", pdf_out,
+		"-output-directory=" + tmpdir,
+		tex_out,
+	)
+	xelatex.Stdout = os.Stdout
+	xelatex.Stderr = os.Stderr
+	if xelatex.Run() != nil {
+		log.Fatal("pdfserver xelatex.Run:", err)
 	}
 
 	content, err := ioutil.ReadFile(pdf_out)
