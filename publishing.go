@@ -64,7 +64,7 @@ func main() {
 	http.HandleFunc("/", IndexServer)
 
 	log.Println("Starting Server")
-	err := http.ListenAndServe(":3000", nil)
+	err := http.ListenAndServe("127.0.0.1:3000", nil)
 	if err != nil {
 		log.Fatal("Listen and Serve: ", err.String())
 	}
