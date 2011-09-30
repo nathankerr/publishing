@@ -17,7 +17,10 @@
 
 % Setup Font and Font sizes
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX]{Georgia}
+%\setmainfont[Ligatures=TeX]{Georgia}
+%\setmainfont{Georgia}
+%\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[Mapping=tex-text]{Georgia}
 
 \renewcommand\tiny{
 	\fontsize{\sizetiny}{\sizescriptsize}
@@ -98,7 +101,33 @@
 \setsubparaheadstyle{\bfseries}
 \setaftersubparaskip{-1em}
 
+% Title
+\makeatletter
+\renewcommand\@maketitle{
+	\thispagestyle{empty}
+	\vspace{-\parskip}
+	\normalsize
+	\@author \hfill \@date
+	\vspace{2pt}
+	\hrule
+	\begin{center}
+		\vspace{-\parskip}
+		\vspace{2pt}
+		\Large
+		\@title
+	\end{center}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Data from content starts here
+
+\title{$title$}
+\author{$author$}
+\date{$date$}
+
 \begin{document}
+\maketitle
 
 $body$
 
