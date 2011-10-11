@@ -1,62 +1,15 @@
 \documentclass[a5paper,article]{memoir}
 
 % Sizes
-\newcommand\sizeminiscule{1.014pt}
-\newcommand\sizetiny{1.633pt}
-\newcommand\sizescriptsize{2.631pt}
-\newcommand\sizefootnotesize{4.238pt}
-\newcommand\sizesmall{6.828pt}
 \newcommand\sizenormal{11pt}
 \newcommand\sizelarge{17.721pt} % normal * 1.611
-\newcommand\sizeLarge{28.548pt}
-\newcommand\sizeLARGE{45.992pt}
-\newcommand\sizehuge{74.093pt}
-\newcommand\sizeHuge{119.363pt}
-\newcommand\sizeHUGE{192.294pt}
-\newcommand\sizeHUGER{309.786pt}
 
 % Setup Font and Font sizes
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX]{Georgia}
 
-\renewcommand\tiny{
-	\fontsize{\sizetiny}{\sizescriptsize}
-	\selectfont
-}
-\renewcommand\scriptsize{
-	\fontsize{\sizescriptsize}{\sizefootnotesize}
-	\selectfont
-}
-\renewcommand\footnotesize{
-	\fontsize{\sizefootnotesize}{\sizesmall}
-	\selectfont
-}
-\renewcommand\small{
-	\fontsize{\sizesmall}{\sizenormal}
-	\selectfont
-}
 \renewcommand\normalsize{
 	\fontsize{\sizenormal}{\sizelarge}
-	\selectfont
-}
-\renewcommand\large{
-	\fontsize{\sizelarge}{\sizeLarge}
-	\selectfont
-}
-\renewcommand\Large{
-	\fontsize{\sizeLarge}{\sizeLARGE}
-	\selectfont
-}
-\renewcommand\LARGE{
-	\fontsize{\sizeLARGE}{\sizehuge}
-	\selectfont
-}
-\renewcommand\huge{
-	\fontsize{\sizehuge}{\sizeHuge}
-	\selectfont
-}
-\renewcommand\Huge{
-	\fontsize{\sizeHuge}{\sizeHUGE}
 	\selectfont
 }
 
@@ -68,22 +21,36 @@
 \setlength\parindent{0pt}
 \setlength\parskip{\sizelarge}
 
+% pandoc starts with chapters, since we are in an article, we want it to appear like an article
+
+%\renewcommand\chapterheadstart{\vspace{-\parskip}}
+\renewcommand{\chapnamefont}{\LARGE}
+\renewcommand{\chapnumfont}{\LARGE}
+%\setlength\midchapskip{2pt}
+\renewcommand{\chaptitlefont}{\LARGE}
+\renewcommand\printchapternonum{\vphantom{\chapnamefont Chapter \chapnumfont 2}\vspace{2pt}}
+\renewcommand{\printchaptertitle}[1]{%
+	\chaptitlefont
+	#1
+}
+
 % Section style
+% Has two lines (35.442pt)
 \setbeforesecskip{\sizelarge}
 \setsecindent{0pt}
-\setsecheadstyle{\Large}
+\setsecheadstyle{Section.\fontsize{\sizelarge}{\sizelarge}\selectfont}
 \setaftersecskip{1pt}
 
 % Subsection style
 \setbeforesubsecskip{\sizenormal}
 \setsubsecindent{0pt}
-\setsubsecheadstyle{\large}
+\setsubsecheadstyle{\bfseries}
 \setaftersubsecskip{1pt}
 
 % Subsubsection style
 \setbeforesubsubsecskip{1pt}
 \setsubsecindent{0pt}
-\setsubsubsecheadstyle{\normalsize}
+\setsubsubsecheadstyle{}
 \setaftersubsubsecskip{1pt}
 
 % Paragraph style

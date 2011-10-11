@@ -32,7 +32,8 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatal("pdfserver tmpdir:", err)
 	}
-	defer os.RemoveAll(tmpdir)
+	//defer os.RemoveAll(tmpdir)
+	log.Println("Rendering to:", tmpdir)
 
 	template, err := filepath.Abs(PANDOC_DIR)
 	if err != nil {
