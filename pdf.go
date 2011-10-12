@@ -91,6 +91,8 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 		log.Fatal("pdfserver read content:", err)
 	}
 	w.Write(content)
+
+	log.Println("Rendered to:", tmpdir)
 }
 
 func draftFilename(req *http.Request) string {

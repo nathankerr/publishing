@@ -2,7 +2,7 @@ Working on latex (article):
 
 - Paragraphs (body text) [done]
 - Headings (6 heading levels, staring with chapter (which means section)) [done]
-- Block Quotations
+- Block Quotations [done]
 - Code Blocks
 - Bullet Lists
 - Ordered Lists
