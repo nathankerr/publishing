@@ -1,12 +1,24 @@
 Working on latex (article):
 
 - Paragraphs (body text) [done]
-- Headings
-	- all headings are numbered
-	- section (two lines, normal)
-	- subsection (one line, bold)
-	- subsubsection (one line, normal)
-	- paragraph (inline, bold)
-	- subparagraph (inline, normal)
-	- heading 6 does not render as a latex heading
-	- chapter heading can be used with --chapters, modification of title for use (like before)
+- Headings (6 heading levels, staring with chapter (which means section)) [done]
+- Block Quotations
+- Code Blocks
+- Bullet Lists
+- Ordered Lists
+- Definition Lists
+- Numbered Example Lists
+- Horizontal Rules
+- Tables
+- Title [done]
+- Emphasis
+- Strong Emphasis
+- Strikeout
+- Superscripts
+- Subscript
+- Verbatim
+- Math
+- Links
+- Images
+- Footnotes
+- Citations
