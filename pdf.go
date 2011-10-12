@@ -35,6 +35,15 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 	//defer os.RemoveAll(tmpdir)
 	log.Println("Rendering to:", tmpdir)
 
+	// Place a symlink to the style file in the temp dir
+	pandocdir, err := filepath.Abs(PANDOC_DIR)
+	if err != nil {
+		log.Fatal("pdfserver pandocdir:", err)
+	}
+	stylefilepath := filepath.Join(pandocdir, "article.cls")
+	tempstylefile := filepath.Join(tmpdir, "article.cls")
+	os.Symlink(stylefilepath, tempstylefile)
+
 	template, err := filepath.Abs(PANDOC_DIR)
 	if err != nil {
 		log.Fatal("pdfserver template:", err)
@@ -54,6 +63,7 @@ func PDFServer(w http.ResponseWriter, req *http.Request) {
 		"--xetex",
 		"--smart",
 		"--template", template,
+		"--chapters",
 	)
 
 	pandoc.Stdin = bytes.NewBuffer(iconv_out)
